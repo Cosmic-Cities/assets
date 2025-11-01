@@ -9,6 +9,9 @@ using StringTools;
  * This HXP file configures the assets for the Cosmic Cities project.
  * It's written in Haxe rather than XML for better organization and maintainability.
  * Based on the Friday Night Funkin' project structure.
+ * 
+ * Note: This file is designed to be used as a standalone project configuration
+ * for the assets repository, or to be referenced from a parent project.
  */
 class Project extends HXProject
 {

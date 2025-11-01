@@ -23,34 +23,33 @@ git clone https://github.com/Cosmic-Cities/assets.git assets
 
 ### Option A: Reference in project.xml
 
-In your main `project.xml`, add:
+In your main `project.xml`, you can include the assets directory and let Lime handle the asset discovery:
 
 ```xml
-<include path="assets/project.hxp" />
+<!-- Include assets from the assets repository -->
+<assets path="assets/animsprites" rename="assets/animsprites" exclude=".*|*.ase|*.md" />
+<assets path="assets/fonts" rename="assets/fonts" exclude=".*|*.ase|*.md" />
+<assets path="assets/icons" rename="assets/icons" exclude=".*|*.ase|*.md" />
+<assets path="assets/locales" rename="assets/locales" exclude=".*|*.ase|*.md" />
+<assets path="assets/maps" rename="assets/maps" exclude=".*|*.ase|*.md" />
+<assets path="assets/sounds" rename="assets/sounds" exclude=".*|*.ase|*.md" />
+<assets path="assets/sprites" rename="assets/sprites" exclude=".*|*.ase|*.md" />
 ```
 
-### Option B: Reference in project.hxp
+### Option B: Use as an HXP project directly
 
-If your main project uses an HXP file, you can include the assets project:
+If you want to use this repository's project.hxp as your main project file:
 
-```haxe
-// In your main project.hxp constructor
-new assets.Project(); // This will configure all asset paths
+```bash
+cd assets
+lime test <platform>
 ```
 
-### Option C: Manual Asset Configuration
+Note: This requires the parent project to have the necessary Haxe source files.
 
-Add the asset paths directly in your project configuration:
+### Option C: Import from parent HXP
 
-```xml
-<assets path="assets/animsprites" rename="assets/animsprites" />
-<assets path="assets/fonts" rename="assets/fonts" />
-<assets path="assets/icons" rename="assets/icons" />
-<assets path="assets/locales" rename="assets/locales" />
-<assets path="assets/maps" rename="assets/maps" />
-<assets path="assets/sounds" rename="assets/sounds" />
-<assets path="assets/sprites" rename="assets/sprites" />
-```
+If your main project uses HXP, you can programmatically include these assets. Create a reference to the assets project configuration in your main project setup.
 
 ## Accessing Assets in Code
 
