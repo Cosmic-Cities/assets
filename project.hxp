@@ -81,14 +81,22 @@ class Project extends HXProject
    */
   function addAssetLibraries():Void
   {
+    // Define all asset directories
+    final assetDirs:Array<String> = [
+      "animsprites",
+      "fonts",
+      "icons",
+      "locales",
+      "maps",
+      "sounds",
+      "sprites"
+    ];
+
     // Add each asset directory
-    includeAssets("animsprites");
-    includeAssets("fonts");
-    includeAssets("icons");
-    includeAssets("locales");
-    includeAssets("maps");
-    includeAssets("sounds");
-    includeAssets("sprites");
+    for (dir in assetDirs)
+    {
+      includeAssets(dir);
+    }
   }
 
   /**
@@ -106,6 +114,11 @@ class Project extends HXProject
         rename: "assets/" + path,
         exclude: EXCLUDE_ASSETS
       });
+    }
+    else
+    {
+      // Directory doesn't exist - this is expected if the assets repo is used standalone
+      // or if certain asset directories are optional
     }
   }
 }
