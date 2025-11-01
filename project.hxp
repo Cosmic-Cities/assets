@@ -1,0 +1,124 @@
+package;
+
+import hxp.*;
+import sys.FileSystem;
+
+using StringTools;
+
+/**
+ * This HXP file configures the assets for the Cosmic Cities project.
+ * It's written in Haxe rather than XML for better organization and maintainability.
+ * Based on the Friday Night Funkin' project structure.
+ * 
+ * Note: This file is designed to be used as a standalone project configuration
+ * for the assets repository, or to be referenced from a parent project.
+ */
+class Project extends HXProject
+{
+  //
+  // METADATA
+  //
+
+  /**
+   * The project's version number.
+   */
+  static final VERSION:String = "0.1.0";
+
+  /**
+   * The project's name.
+   */
+  static final TITLE:String = "Cosmic Cities Assets";
+
+  /**
+   * Package name for the assets.
+   */
+  static final PACKAGE_NAME:String = "com.cosmiccities.assets";
+
+  //
+  // ASSET FILTERS
+  //
+
+  /**
+   * Asset path globs to always exclude from asset libraries.
+   */
+  static final EXCLUDE_ASSETS:Array<String> = [
+    ".*",           // Hidden files
+    "cvs",          // CVS directories
+    "thumbs.db",    // Windows thumbnail cache
+    "desktop.ini",  // Windows desktop settings
+    "*.hash",       // Hash files
+    "*.md",         // Markdown files
+    "*.ase",        // Aseprite files (source only)
+    ".git*"         // Git files
+  ];
+
+  //
+  // CONSTRUCTOR
+  //
+
+  public function new()
+  {
+    super();
+
+    // Set project metadata
+    meta = {
+      title: TITLE,
+      packageName: PACKAGE_NAME,
+      version: VERSION,
+      company: "Cosmic Cities"
+    };
+
+    // Add asset libraries
+    addAssetLibraries();
+  }
+
+  //
+  // ASSET CONFIGURATION
+  //
+
+  /**
+   * Configure asset libraries for all asset directories.
+   */
+  function addAssetLibraries():Void
+  {
+    // Define all asset directories
+    final assetDirs:Array<String> = [
+      "animsprites",
+      "fonts",
+      "icons",
+      "locales",
+      "maps",
+      "sounds",
+      "sprites"
+    ];
+
+    // Add each asset directory
+    for (dir in assetDirs)
+    {
+      includeAssets(dir);
+    }
+  }
+
+  /**
+   * Include assets from a directory with exclusion filters.
+   * 
+   * @param path The path to the asset directory
+   */
+  function includeAssets(path:String):Void
+  {
+    if (FileSystem.exists(path) && FileSystem.isDirectory(path))
+    {
+      // Add the asset directory
+      // Assets will be included under "assets/{path}" in the final build
+      addAssets(path, {
+        rename: "assets/" + path,
+        exclude: EXCLUDE_ASSETS
+      });
+    }
+    else
+    {
+      // Directory doesn't exist - this is expected if the assets repo is used standalone
+      // or if certain asset directories are optional
+    }
+  }
+}
