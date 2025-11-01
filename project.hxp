@@ -1,0 +1,153 @@
+package;
+
+import hxp.*;
+import sys.FileSystem;
+
+using StringTools;
+
+/**
+ * This HXP file configures the assets for the Cosmic Cities project.
+ * It's written in Haxe rather than XML for better organization and maintainability.
+ */
+class Project extends HXProject
+{
+  //
+  // METADATA
+  //
+
+  /**
+   * The project's version number.
+   */
+  static final VERSION:String = "0.1.0";
+
+  /**
+   * The project's name.
+   */
+  static final TITLE:String = "Cosmic Cities Assets";
+
+  /**
+   * Package name for the assets.
+   */
+  static final PACKAGE_NAME:String = "com.cosmiccities.assets";
+
+  //
+  // ASSET FILTERS
+  //
+
+  /**
+   * Asset path globs to always exclude from asset libraries.
+   */
+  static final EXCLUDE_ASSETS:Array<String> = [
+    ".*",           // Hidden files
+    "cvs",          // CVS directories
+    "thumbs.db",    // Windows thumbnail cache
+    "desktop.ini",  // Windows desktop settings
+    "*.hash",       // Hash files
+    "*.md",         // Markdown files
+    "*.ase",        // Aseprite files (source only)
+    ".git*"         // Git files
+  ];
+
+  //
+  // CONSTRUCTOR
+  //
+
+  public function new()
+  {
+    super();
+
+    // Set project metadata
+    meta = {
+      title: TITLE,
+      packageName: PACKAGE_NAME,
+      version: VERSION,
+      company: "Cosmic Cities"
+    };
+
+    // Add asset libraries
+    addAssetLibraries();
+  }
+
+  //
+  // ASSET CONFIGURATION
+  //
+
+  /**
+   * Configure asset libraries for all asset directories.
+   */
+  function addAssetLibraries():Void
+  {
+    // Define asset directories
+    final assetDirs:Array<String> = [
+      "animsprites",
+      "fonts",
+      "icons",
+      "locales",
+      "maps",
+      "sounds",
+      "sprites"
+    ];
+
+    // Add each asset directory as an asset library
+    for (dir in assetDirs)
+    {
+      if (FileSystem.exists(dir) && FileSystem.isDirectory(dir))
+      {
+        addAssets(dir, dir, EXCLUDE_ASSETS);
+      }
+    }
+  }
+
+  /**
+   * Add assets from a directory with exclusion filters.
+   * 
+   * @param path The path to the asset directory
+   * @param rename Optional rename pattern for the asset path
+   * @param excludes Array of glob patterns to exclude
+   */
+  function addAssets(path:String, ?rename:String, ?excludes:Array<String>):Void
+  {
+    final asset = new HXPAssetLibrary("", path);
+    
+    if (rename != null)
+    {
+      asset.rename = rename;
+    }
+
+    // Apply exclusion filters
+    if (excludes != null)
+    {
+      for (pattern in excludes)
+      {
+        asset.exclude.push(pattern);
+      }
+    }
+
+    libraries.push(asset);
+  }
+
+  //
+  // UTILITY METHODS
+  //
+
+  /**
+   * Check if a file should be excluded based on exclusion patterns.
+   */
+  function shouldExclude(file:String, excludes:Array<String>):Bool
+  {
+    for (pattern in excludes)
+    {
+      // Simple pattern matching - can be extended
+      if (pattern.startsWith("*."))
+      {
+        final ext = pattern.substr(1);
+        if (file.endsWith(ext)) return true;
+      }
+      else if (file.indexOf(pattern) >= 0)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+}
