@@ -1,0 +1,134 @@
+import lime.tools.HXProject;
+import lime.tools.Asset;
+import lime.tools.AssetType;
+import sys.FileSystem;
+import sys.io.File;
+
+class Project extends HXProject {
+	public function new() {
+		super();
+	}
+
+	override public function create():Void {
+		super.create();
+		
+		// Basic project configuration
+		this.meta.title = "Cosmic Cities";
+		this.meta.packageName = "com.cosmiccities.game";
+		this.meta.version = "1.0.0";
+		this.meta.company = "Cosmic Cities";
+		
+		// Window configuration
+		this.window.width = 1280;
+		this.window.height = 720;
+		this.window.fps = 60;
+		this.window.background = 0x000000;
+		this.window.resizable = true;
+		this.window.borderless = false;
+		this.window.vsync = true;
+		this.window.fullscreen = false;
+		this.window.hardware = true;
+		this.window.allowHighDPI = true;
+		this.window.antialiasing = 0;
+		
+		// Setup assets
+		setupAssets();
+	}
+
+	function setupAssets():Void {
+		// Add all asset directories to the assets path
+		trace("Setting up assets...");
+		
+		// Fonts directory
+		if (FileSystem.exists("fonts")) {
+			addAssetDirectory("fonts", "assets/fonts");
+			trace("Added fonts directory");
+		}
+		
+		// Sounds directory
+		if (FileSystem.exists("sounds")) {
+			addAssetDirectory("sounds", "assets/sounds");
+			trace("Added sounds directory");
+		}
+		
+		// Sprites directory
+		if (FileSystem.exists("sprites")) {
+			addAssetDirectory("sprites", "assets/sprites");
+			trace("Added sprites directory");
+		}
+		
+		// Maps directory
+		if (FileSystem.exists("maps")) {
+			addAssetDirectory("maps", "assets/maps");
+			trace("Added maps directory");
+		}
+		
+		// Icons directory
+		if (FileSystem.exists("icons")) {
+			addAssetDirectory("icons", "assets/icons");
+			trace("Added icons directory");
+		}
+		
+		// Animated sprites directory
+		if (FileSystem.exists("animsprites")) {
+			addAssetDirectory("animsprites", "assets/animsprites");
+			trace("Added animsprites directory");
+		}
+		
+		// Locales directory
+		if (FileSystem.exists("locales")) {
+			addAssetDirectory("locales", "assets/locales");
+			trace("Added locales directory");
+		}
+		
+		trace("Assets setup complete!");
+	}
+
+	function addAssetDirectory(sourcePath:String, targetPath:String):Void {
+		if (!FileSystem.exists(sourcePath)) {
+			trace('Warning: Directory not found: $sourcePath');
+			return;
+		}
+		
+		var files = FileSystem.readDirectory(sourcePath);
+		
+		for (file in files) {
+			var fullPath = sourcePath + "/" + file;
+			var assetPath = targetPath + "/" + file;
+			
+			if (FileSystem.isDirectory(fullPath)) {
+				// Recursively add subdirectories
+				addAssetDirectory(fullPath, assetPath);
+			} else {
+				// Add individual file as asset
+				var assetType = getAssetType(file);
+				
+				var asset = new Asset();
+				asset.sourcePath = fullPath;
+				asset.targetPath = assetPath;
+				asset.id = assetPath;
+				asset.type = assetType;
+				
+				// Add rename to make the asset ID cleaner (remove "assets/" prefix for easier access)
+				asset.rename = assetPath.substring("assets/".length);
+				
+				this.assets.push(asset);
+			}
+		}
+	}
+
+	function getAssetType(filename:String):AssetType {
+		var extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
+		
+		return switch (extension) {
+			case "jpg", "jpeg", "png", "gif", "bmp": AssetType.IMAGE;
+			case "mp3", "ogg", "wav", "flac": AssetType.SOUND;
+			case "ttf", "otf": AssetType.FONT;
+			case "mp4", "mov", "avi", "webm": AssetType.VIDEO;
+			case "json", "xml", "csv", "txt", "fnt": AssetType.TEXT;
+			case "tmx", "tsx": AssetType.TEXT; // Tiled map files
+			case "ase", "aseprite": AssetType.BINARY; // Aseprite files
+			default: AssetType.BINARY;
+		}
+	}
+}

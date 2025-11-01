@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- Project metadata -->
+	<meta title="Cosmic Cities" package="com.cosmiccities.game" version="1.0.0" company="Cosmic Cities" />
+	
+	<!-- Application window settings -->
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="true" />
+	<window resizable="true" borderless="false" fullscreen="false" />
+	<window allow-high-dpi="true" antialiasing="0" />
+	
+	<!-- Application entry point -->
+	<app main="Main" path="Export" file="CosmicCities" />
+	
+	<!-- Source paths -->
+	<source path="src" />
+	
+	<!-- Haxelibs -->
+	<haxelib name="lime" />
+	<haxelib name="openfl" />
+	<haxelib name="flixel" />
+	<haxelib name="flixel-addons" />
+	<haxelib name="flixel-ui" />
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-flixel" />
+	
+	<!-- Assets -->
+	<!-- Fonts -->
+	<assets path="fonts" rename="fonts" include="*.ttf|*.otf|*.fnt|*.png" />
+	
+	<!-- Sounds and Music -->
+	<assets path="sounds" rename="sounds" include="*.mp3|*.wav|*.ogg" />
+	
+	<!-- Sprites and Images -->
+	<assets path="sprites" rename="sprites" include="*.png|*.jpg|*.jpeg" />
+	
+	<!-- Maps (Tiled) -->
+	<assets path="maps" rename="maps" include="*.tmx|*.tsx" />
+	
+	<!-- Icons -->
+	<assets path="icons" rename="icons" include="*.png|*.ico" />
+	
+	<!-- Animated Sprites -->
+	<assets path="animsprites" rename="animsprites" include="*.ase|*.aseprite" />
+	
+	<!-- Localization -->
+	<assets path="locales" rename="locales" include="*.xml|*.csv" />
+	
+	<!-- Icons for different platforms -->
+	<icon path="icons/icon16.png" size="16" />
+	<icon path="icons/icon32.png" size="32" />
+	<icon path="icons/icon48.png" size="48" />
+	<icon path="icons/icon64.png" size="64" />
+	<icon path="icons/icon128.png" size="128" />
+	<icon path="icons/icon256.png" size="256" />
+	
+	<!-- Haxe flags -->
+	<haxeflag name="--macro" value="flixel.system.macros.FlxDefines.run()" />
+	
+	<!-- Debug settings -->
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	
+	<!-- Platform specific settings -->
+	<section if="windows">
+		<icon path="icons/icon.ico" />
+	</section>
+	
+	<section if="mac">
+		<icon path="icons/icon.icns" />
+	</section>
+	
+	<section if="linux">
+		<window hardware="true" allow-shaders="true" require-shaders="true" />
+	</section>
+	
+	<section if="html5">
+		<window web-allow-high-dpi="true" />
+	</section>
+</project>
