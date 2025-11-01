@@ -110,7 +110,9 @@ class Project extends HXProject {
 				asset.type = assetType;
 				
 				// Add rename to make the asset ID cleaner (remove "assets/" prefix for easier access)
-				asset.rename = assetPath.substring("assets/".length);
+				if (assetPath.indexOf("assets/") == 0) {
+					asset.rename = assetPath.substring("assets/".length);
+				}
 				
 				this.assets.push(asset);
 			}
@@ -118,7 +120,12 @@ class Project extends HXProject {
 	}
 
 	function getAssetType(filename:String):AssetType {
-		var extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
+		var dotIndex = filename.lastIndexOf(".");
+		if (dotIndex == -1) {
+			return AssetType.BINARY; // No extension, treat as binary
+		}
+		
+		var extension = filename.substring(dotIndex + 1).toLowerCase();
 		
 		return switch (extension) {
 			case "jpg", "jpeg", "png", "gif", "bmp": AssetType.IMAGE;
