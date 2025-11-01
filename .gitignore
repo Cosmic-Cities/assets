@@ -1,0 +1,32 @@
+# Build outputs
+Export/
+export/
+bin/
+build/
+
+# Haxe
+*.n
+*.swf
+*.js.map
+
+# Lime/OpenFL
+.lime/
+.temp/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~
