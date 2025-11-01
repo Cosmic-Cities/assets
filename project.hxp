@@ -8,6 +8,7 @@ using StringTools;
 /**
  * This HXP file configures the assets for the Cosmic Cities project.
  * It's written in Haxe rather than XML for better organization and maintainability.
+ * Based on the Friday Night Funkin' project structure.
  */
 class Project extends HXProject
 {
@@ -77,77 +78,31 @@ class Project extends HXProject
    */
   function addAssetLibraries():Void
   {
-    // Define asset directories
-    final assetDirs:Array<String> = [
-      "animsprites",
-      "fonts",
-      "icons",
-      "locales",
-      "maps",
-      "sounds",
-      "sprites"
-    ];
-
-    // Add each asset directory as an asset library
-    for (dir in assetDirs)
-    {
-      if (FileSystem.exists(dir) && FileSystem.isDirectory(dir))
-      {
-        addAssets(dir, dir, EXCLUDE_ASSETS);
-      }
-    }
+    // Add each asset directory
+    includeAssets("animsprites");
+    includeAssets("fonts");
+    includeAssets("icons");
+    includeAssets("locales");
+    includeAssets("maps");
+    includeAssets("sounds");
+    includeAssets("sprites");
   }
 
   /**
-   * Add assets from a directory with exclusion filters.
+   * Include assets from a directory with exclusion filters.
    * 
    * @param path The path to the asset directory
-   * @param rename Optional rename pattern for the asset path
-   * @param excludes Array of glob patterns to exclude
    */
-  function addAssets(path:String, ?rename:String, ?excludes:Array<String>):Void
+  function includeAssets(path:String):Void
   {
-    final asset = new HXPAssetLibrary("", path);
-    
-    if (rename != null)
+    if (FileSystem.exists(path) && FileSystem.isDirectory(path))
     {
-      asset.rename = rename;
+      // Add the asset directory
+      // Assets will be included under "assets/{path}" in the final build
+      addAssets(path, {
+        rename: "assets/" + path,
+        exclude: EXCLUDE_ASSETS
+      });
     }
-
-    // Apply exclusion filters
-    if (excludes != null)
-    {
-      for (pattern in excludes)
-      {
-        asset.exclude.push(pattern);
-      }
-    }
-
-    libraries.push(asset);
-  }
-
-  //
-  // UTILITY METHODS
-  //
-
-  /**
-   * Check if a file should be excluded based on exclusion patterns.
-   */
-  function shouldExclude(file:String, excludes:Array<String>):Bool
-  {
-    for (pattern in excludes)
-    {
-      // Simple pattern matching - can be extended
-      if (pattern.startsWith("*."))
-      {
-        final ext = pattern.substr(1);
-        if (file.endsWith(ext)) return true;
-      }
-      else if (file.indexOf(pattern) >= 0)
-      {
-        return true;
-      }
-    }
-    return false;
   }
 }
