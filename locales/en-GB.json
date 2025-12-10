@@ -1,0 +1,16 @@
+{
+    "config": {
+        "font": {
+            "fnt": "fonts/pixel_operator/pixel_operator.fnt",
+            "png": "fonts/pixel_operator/pixel_operator.png",
+        }
+    },
+    "data": {
+        "ui": {
+            
+        },
+        "dialog": {
+
+        }
+    }
+}
