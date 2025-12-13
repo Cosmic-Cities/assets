@@ -2,15 +2,183 @@
     "config": {
         "font": {
             "fnt": "fonts/pixel_operator/pixel_operator.fnt",
-            "png": "fonts/pixel_operator/pixel_operator.png",
-        }
+            "png": "fonts/pixel_operator/pixel_operator.png"
+        },
+        "language": "English",
+        "region": "United Kingdom"
     },
     "data": {
         "ui": {
-            
+            "loading": {
+                "init-discord-rpc": "Initialising Discord RPC...",
+                "assets": {
+                    "assets": "Loading assets...",
+                    "scan": "Scanning assets...",
+                    "index": "Indexing and preparing...",
+                    "textures": "Loading textures...",
+                    "audio": "Preloading audio...",
+                    "fonts": "Priming fonts..."
+                },
+                "systems-warmup": "Warming up systems...",
+                "finalize": "Finalising...",
+                "ready": "Ready",
+                "done": "Done!"
+            },
+            "menu": {
+                "start": "Start",
+                "options": "Options",
+                "credits": "Credits",
+                "exit": "Exit"
+            },
+            "copyright": "© OmgRod 2025 - All Rights Reserved",
+            "general": {
+                "yes": "Yes",
+                "no": "No",
+                "back": "Back",
+                "previous": "Prev",
+                "next": "Next",
+                "quitting": "Quitting",
+                "delete": "Delete",
+                "continue": "Continue",
+                "cancel": "Cancel",
+                "reset": "Reset"
+            },
+            "setting": {
+                "volume": "Volume",
+                "title": "Options",
+                "languages": "Languages",
+                "controls": {
+                    "title": "Controls",
+                    "move": {
+                        "up": "Move Up",
+                        "down": "Move Down",
+                        "left": "Move Left",
+                        "right": "Move Right"
+                    },
+                    "dialog": {
+                        "skip": "Skip Dialog",
+                        "advance": "Advance Dialog"
+                    },
+                    "pause": "Pause Menu",
+                    "quit": "Quit Game",
+                    "press-any-key": "Press any key..."
+                }
+            },
+            "credits": {
+                "title": "Credits",
+                "section": {
+                    "development": "Game Design & Development",
+                    "art": "Art & Graphics",
+                    "audio": "Audio",
+                    "writing": "Writing",
+                    "technology": "Technology",
+                    "backers": "Backers",
+                    "thanks": "Special Thanks"
+                },
+                "role": {
+                    "game-director": "Game Director",
+                    "lead-programmer": "Lead Programmer",
+                    "game-designer": "Game Designer",
+                    "lead-artist": "Lead Artist",
+                    "sprite-design": "Sprite Design",
+                    "ui-design": "UI Design",
+                    "music-composer": "Music Composer",
+                    "sound-design": "Sound Design",
+                    "story-writer": "Story Writer",
+                    "dialogue-writer": "Dialogue Writer"
+                },
+                "tech": {
+                    "engine": "Made in Axmol Engine"
+                },
+                "thanks": {
+                    "community": "The Axmol Community",
+                    "you": "Thank you for playing!"
+                },
+                "skip-hint": "Press ESC to skip"
+            },
+            "splash": {
+                "s01": "Now with 100% more space!",
+                "s02": "You are not alone...",
+                "s03": "Press Enter to interact!",
+                "s04": "Asteroids not included.",
+                "s05": "Made with Axmol!",
+                "s06": "Don't forget to save!",
+                "s07": "Space is big. Really big.",
+                "s08": "May contain cosmic rays!",
+                "s09": "The cake is a planet!",
+                "s10": "Batteries not included.",
+                "s11": "Now with more pixels!",
+                "s12": "Insert coin to continue!",
+                "s13": "Zero gravity, zero worries!"
+            },
+            "pause": {
+                "title": "Paused",
+                "resume": "Resume",
+                "options": "Options",
+                "main-menu": "Main Menu"
+            },
+            "save-select": {
+                "title": "Select Save Slot",
+                "new": "New Save",
+                "name": {
+                    "prompt": "Enter your name:",
+                    "hint": "ENTER to confirm and ESC to cancel"
+                },
+                "delete": {
+                    "confirm": "Delete this save?",
+                    "warning": "This cannot be undone!",
+                    "yes": "Yes, Delete"
+                }
+            },
+            "mods": {
+                "title": "Mods",
+                "status": {
+                    "on": "[ON]",
+                    "off": "[OFF]"
+                },
+                "instructions": "Use Up/Down to navigate, Enter to toggle"
+            }
         },
-        "dialog": {
-
+        "dialog": {},
+        "story": {
+            "chapter": {
+                "c1": {
+                    "number": "Chapter 1",
+                    "name": "The Exodus"
+                },
+                "c2": {
+                    "number": "Chapter 2",
+                    "name": "The Search"
+                },
+                "c3": {
+                    "number": "Chapter 3",
+                    "name": "The Escape"
+                },
+                "c4": {
+                    "number": "Chapter 4",
+                    "name": "Station Acheron"
+                },
+                "c5": {
+                    "number": "Chapter 5",
+                    "name": "The Phantom Belt"
+                },
+                "c6": {
+                    "number": "Chapter 6",
+                    "name": "The Fractured Moon"
+                },
+                "c7": {
+                    "number": "Chapter 7",
+                    "name": "The Singularity"
+                },
+                "c8": {
+                    "number": "Chapter 8",
+                    "name": "The Corridor Beyond Time"
+                },
+                "c9": {
+                    "number": "Chapter 9",
+                    "name": "To Find Home Again"
+                }
+            }
         }
     }
 }
