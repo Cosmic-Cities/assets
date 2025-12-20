@@ -22,7 +22,7 @@
             "credits": "Credits",
             "exit": "Exit"
         },
-        "copyright": "© OmgRod 2025 - All Rights Reserved",
+        "copyright": "© OmgRod {} - All Rights Reserved",
         "general": {
             "yes": "Yes",
             "no": "No",
